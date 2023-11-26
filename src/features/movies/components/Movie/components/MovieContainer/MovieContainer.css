@@ -1,0 +1,25 @@
+.movie-card {
+}
+
+.movie-poster {
+  margin-right: 10px;
+}
+
+.movie-details {
+  flex-grow: 1;
+}
+
+.movie-title {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  max-width: 100%;
+  white-space: break-spaces;
+}
+
+.movie-overview {
+  font-size: 0.9em;
+  color: #555;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

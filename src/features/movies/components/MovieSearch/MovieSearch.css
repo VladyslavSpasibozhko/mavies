@@ -1,0 +1,36 @@
+.mv-select {
+  width: 100%;
+}
+
+.mv-select .mv__control {
+  box-shadow: none;
+  border: none;
+  border-radius: 8px;
+  padding: 4px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.mv-select .mv__control .mv__value-container {
+}
+
+.mv-select .mv__control .mv__value-container .mv__input-container .mv__input {
+  color: white !important;
+}
+
+.mv-select .mv__control .mv__value-container .mv__placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mv-select .mv__menu .mv__menu-list .mv__option {
+  background-color: white;
+}
+
+.mv-select .mv__menu .mv__menu-list .mv__option .mv__option--is-focused {
+  background-color: rgb(74, 74, 74);
+  color: white;
+}
+
+.mv-select .mv__menu .mv__menu-list .mv__option:hover {
+  background-color: rgb(74, 74, 74);
+  color: white;
+}
