@@ -5,6 +5,8 @@ type Voting = {
   max: string | number;
 };
 
+// TODO: Save data to url
+// TODO: Create context for sharing data between components
 export function useFilters() {
   const [page, setPage] = useState(1);
 

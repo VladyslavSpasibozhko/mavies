@@ -1,25 +1,35 @@
-import { MovieContainer } from "./components/MovieContainer/MovieContainer";
-import { MovieDetails } from "./components/MovieDetails/MovieDetails";
-import { MovieImage } from "./components/MovieImage/MovieImage";
-import { MovieOverview } from "./components/MovieOverview";
-import { MovieTitle } from "./components/MovieTitle";
+import { Card } from "@chakra-ui/react";
+import { MovieFooter } from "./components/MovieFooter";
+import { Img } from "@components/Image";
+import { useNavigation } from "@hooks/useNavigation";
 
-export type MovieProps = {
-  title: string;
-  overview: string;
-  poster?: string | null;
-  onClick?: () => void;
-};
+export function Movie({ movie }: { movie: MovieBase }) {
+  const { goTo } = useNavigation();
 
-export function Movie({ title, overview, poster, onClick }: MovieProps) {
   return (
-    <MovieContainer onClick={onClick}>
-      <MovieImage src={poster} className="movie-poster" />
+    <Card
+      mr={6}
+      flex="1 0 480px"
+      borderRadius={6}
+      overflow="hidden"
+      transition="transform 0.1s linear"
+      position="relative"
+      background="blackAlpha.500"
+      _hover={{ transform: "scale(1.05)" }}
+    >
+      <Img
+        src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+        width="100%"
+        height="100%"
+        objectFit="cover"
+        onClick={() => {
+          goTo("/movies/:id", { id: movie.id });
+        }}
+        skeletonH={280}
+        skeletonW={480}
+      />
 
-      <MovieDetails>
-        <MovieTitle title={title} />
-        <MovieOverview overview={overview} />
-      </MovieDetails>
-    </MovieContainer>
+      <MovieFooter movie={movie} />
+    </Card>
   );
 }

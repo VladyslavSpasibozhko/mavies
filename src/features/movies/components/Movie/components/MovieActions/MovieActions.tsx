@@ -1,8 +1,6 @@
 import { Flex } from "@chakra-ui/react";
-import {
-  ToggleFavorite,
-  ToggleWatchList,
-} from "@features/movies/components/Movie/components/MovieActions";
+import { ToggleFavorite } from "@features/movies/components/Movie/components/ToggleFavorite";
+import { ToggleWatchList } from "@features/movies/components/Movie/components/ToggleWatchList";
 
 export function MovieActions({ movie }: { movie: MovieBase }) {
   return (

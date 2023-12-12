@@ -46,8 +46,17 @@ export function useMovies() {
   });
 }
 
-export function usePopularMovies() {
-  const [query, setQuery] = useState<MoviesQuery>();
+export function usePopularMovies(query?: MoviesQuery) {
+  const defaultData: { popularMovies: MovieWithPagination } = {
+    popularMovies: {
+      results: [],
+      pagination: {
+        page: 0,
+        total_pages: 0,
+        total_results: 0,
+      },
+    },
+  };
 
   const auth = useAuthContext();
 
@@ -66,9 +75,7 @@ export function usePopularMovies() {
 
   return {
     ...store,
-    async refetch(query?: MoviesQuery) {
-      setQuery(query);
-    },
+    data: store.data ? store.data : defaultData,
   };
 }
 

@@ -1,0 +1,33 @@
+.gn-select {
+  width: 100%;
+
+  .gn__control {
+    box-shadow: none;
+    border: none;
+    border-radius: 8px;
+    padding: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .gn__control .gn__value-container .gn__input-container .gn__input {
+    color: white !important;
+  }
+
+  .gn-select .gn__control .gn__value-container .gn__placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .gn__menu .gn__menu-list .gn__option {
+    background-color: white;
+  }
+
+  .gn__menu .gn__menu-list .gn__option .gn__option--is-focused {
+    background-color: rgb(74, 74, 74);
+    color: white;
+  }
+
+  .gn__menu .gn__menu-list .gn__option:hover {
+    background-color: rgb(74, 74, 74);
+    color: white;
+  }
+}

@@ -1,5 +1,6 @@
 import ReactSelect from "react-select";
-import { useGenres } from "../../hooks/useGenres";
+import { useGenres } from "@features/genres/hooks/useGenres";
+import "./GenreSelect.css";
 
 type GenresSelectProps = {
   selected: Genre[];
@@ -18,15 +19,22 @@ export function GenresSelect({
 
   return (
     <ReactSelect
+      className="gn-select"
+      classNamePrefix="gn"
       value={selected}
       isLoading={isLoading}
+      isMulti
+      isClearable={false}
       options={options}
       getOptionLabel={(o) => o.name}
       getOptionValue={(o) => o.id.toString()}
       placeholder={placeholder}
-      isMulti
       closeMenuOnSelect={false}
+      controlShouldRenderValue={false}
       onChange={(options) => onChange(options as Genre[])}
+      components={{
+        IndicatorSeparator: null,
+      }}
     />
   );
 }

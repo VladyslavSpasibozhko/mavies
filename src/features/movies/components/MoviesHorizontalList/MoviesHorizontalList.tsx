@@ -1,5 +1,5 @@
 import { Box, Heading } from "@chakra-ui/react";
-import { Movie } from "./components/Movie";
+import { Movie } from "../Movie";
 import { Link } from "@components/Link";
 import { Icon } from "@components/Icon";
 

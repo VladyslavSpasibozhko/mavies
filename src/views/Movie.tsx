@@ -8,10 +8,8 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { constructMovieImageSrc } from "@utils/index";
 import { Icon } from "@components/Icon";
 import { format } from "@utils/date";
-import {
-  ToggleFavorite,
-  ToggleWatchList,
-} from "@features/movies/components/Movie/components/MovieActions";
+import { ToggleFavorite } from "@features/movies/components/Movie/components/ToggleFavorite";
+import { ToggleWatchList } from "@features/movies/components/Movie/components/ToggleWatchList";
 
 // TODO: add similar movie
 // TODO: add trailers

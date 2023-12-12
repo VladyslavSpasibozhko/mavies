@@ -12,7 +12,7 @@ const icons = {
   ...MD,
 };
 
-type IconProps = {
+export type IconProps = {
   name: keyof typeof icons;
 } & ChakraIconProps;
 
