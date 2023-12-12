@@ -1,3 +1,18 @@
+import {
+  GetMovieQuery,
+  GetMovieQueryVariables,
+  MoviesListsQuery,
+  PopularMoviesQuery,
+  PopularMoviesQueryVariables,
+  SearchMoviesQuery,
+  SearchMoviesQueryVariables,
+  SimilarMoviesQuery,
+  SimilarMoviesQueryVariables,
+  TopRatedMoviesQuery,
+  TopRatedMoviesQueryVariables,
+  UpcomingMoviesQuery,
+  UpcomingMoviesQueryVariables,
+} from "@api/gql/graphql";
 import { gqlRequest } from "../request";
 import {
   GET_MOVIE,
@@ -9,8 +24,8 @@ import {
   SEARCH_MOVIES,
 } from "./query";
 
-export function getMovies({ token }: RequestTokens) {
-  return gqlRequest<GetMoviesRes>({
+export function getMovies({ token }: { token: string | null }) {
+  return gqlRequest<MoviesListsQuery>({
     document: GET_MOVIES,
     requestHeaders: {
       authorization: `Bearer ${token}`,
@@ -18,8 +33,11 @@ export function getMovies({ token }: RequestTokens) {
   });
 }
 
-export function getMovie({ token, id }: RequestTokens & { id: string }) {
-  return gqlRequest<{ movie: MovieDetailed }>({
+export function getMovie({
+  token,
+  id,
+}: GetMovieQueryVariables & { token: string | null }) {
+  return gqlRequest<GetMovieQuery>({
     document: GET_MOVIE,
     requestHeaders: {
       authorization: `Bearer ${token}`,
@@ -31,8 +49,8 @@ export function getMovie({ token, id }: RequestTokens & { id: string }) {
 export function getPopularMovies({
   token,
   input,
-}: RequestTokens & { input?: MoviesQuery }) {
-  return gqlRequest<{ popularMovies: MovieWithPagination }>({
+}: PopularMoviesQueryVariables & { token: string | null }) {
+  return gqlRequest<PopularMoviesQuery>({
     document: GET_POPULAR_MOVIES,
     requestHeaders: {
       authorization: `Bearer ${token}`,
@@ -46,8 +64,8 @@ export function getPopularMovies({
 export function getTopRatedMovies({
   token,
   input,
-}: RequestTokens & { input?: MoviesQuery }) {
-  return gqlRequest<{ topMovies: MovieWithPagination }>({
+}: TopRatedMoviesQueryVariables & { token: string | null }) {
+  return gqlRequest<TopRatedMoviesQuery>({
     document: GET_TOP_RATED_MOVIES,
     requestHeaders: {
       authorization: `Bearer ${token}`,
@@ -61,8 +79,8 @@ export function getTopRatedMovies({
 export function getUpcomingMovies({
   token,
   input,
-}: RequestTokens & { input?: MoviesQuery }) {
-  return gqlRequest<{ upcomingMovies: MovieWithPagination }>({
+}: UpcomingMoviesQueryVariables & { token: string | null }) {
+  return gqlRequest<UpcomingMoviesQuery>({
     document: GET_UPCOMING_MOVIES,
     requestHeaders: {
       authorization: `Bearer ${token}`,
@@ -77,8 +95,8 @@ export function getSimilarMovies({
   token,
   id,
   page,
-}: RequestTokens & { id: number; page?: number }) {
-  return gqlRequest<{ similarMovies: MovieWithPagination }>({
+}: SimilarMoviesQueryVariables & { token: string | null }) {
+  return gqlRequest<SimilarMoviesQuery>({
     document: GET_SIMILAR_MOVIES,
     requestHeaders: {
       authorization: `Bearer ${token}`,
@@ -94,8 +112,8 @@ export function searchMovies({
   token,
   query,
   page,
-}: RequestTokens & { query: string; page?: number }) {
-  return gqlRequest<{ searchMovies: MovieWithPagination }>({
+}: SearchMoviesQueryVariables & { token: string | null }) {
+  return gqlRequest<SearchMoviesQuery>({
     document: SEARCH_MOVIES,
     requestHeaders: {
       authorization: `Bearer ${token}`,

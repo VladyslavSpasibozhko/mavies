@@ -81,5 +81,6 @@ export async function gqlRequest<T>(props: {
   variables?: Variables;
 }) {
   // TODO: remove from here
+  // TODO: MOve to env
   return await gqFetch<T>({ url: "http://localhost:8080", ...props });
 }

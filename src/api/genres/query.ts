@@ -1,10 +1,10 @@
-import { gql } from "graphql-request";
+import { graphql } from "@api/gql";
 
-export const GET_GENRES = gql`
+export const GET_GENRES = graphql(`
   query GenreList {
     movieGenres {
       id
       name
     }
   }
-`;
+`);

@@ -1,5 +1,14 @@
 import useSWR from "swr";
-import { useAuthContext } from "../../../context/AuthContext";
+import { useRef, useState } from "react";
+import { useAuthContext } from "@context/AuthContext";
+import {
+  GET_MOVIE,
+  GET_MOVIES,
+  GET_POPULAR_MOVIES,
+  GET_SIMILAR_MOVIES,
+  GET_TOP_RATED_MOVIES,
+  GET_UPCOMING_MOVIES,
+} from "@api/movies/query";
 import {
   getMovie,
   getMovies,
@@ -8,26 +17,18 @@ import {
   getTopRatedMovies,
   getUpcomingMovies,
   searchMovies,
-} from "../../../api/movies";
+} from "@api/movies";
 import {
-  GET_MOVIE,
-  GET_MOVIES,
-  GET_POPULAR_MOVIES,
-  GET_SIMILAR_MOVIES,
-  GET_TOP_RATED_MOVIES,
-  GET_UPCOMING_MOVIES,
-} from "../../../api/movies/query";
-import { useRef, useState } from "react";
+  MovieBaseFragment,
+  Pagination,
+  PopularMoviesQuery,
+} from "@api/gql/graphql";
 
 export function useMovie(id?: string) {
   const auth = useAuthContext();
 
-  return useSWR<{
-    movie: MovieDetailed;
-  }>(id ? [GET_MOVIE, id] : null, () => {
+  return useSWR(id ? [GET_MOVIE, id] : null, () => {
     return getMovie({
-      accountId: auth.accountId,
-      sessionId: auth.sessionId,
       token: auth.accessToken,
       id: id as string,
     });
@@ -37,17 +38,15 @@ export function useMovie(id?: string) {
 export function useMovies() {
   const auth = useAuthContext();
 
-  return useSWR<GetMoviesRes>(GET_MOVIES, () => {
+  return useSWR(GET_MOVIES, () => {
     return getMovies({
-      accountId: auth.accountId,
-      sessionId: auth.sessionId,
       token: auth.accessToken,
     });
   });
 }
 
 export function usePopularMovies(query?: MoviesQuery) {
-  const defaultData: { popularMovies: MovieWithPagination } = {
+  const defaultData: PopularMoviesQuery = {
     popularMovies: {
       results: [],
       pagination: {
@@ -65,8 +64,6 @@ export function usePopularMovies(query?: MoviesQuery) {
     () => {
       return getPopularMovies({
         token: auth.accessToken,
-        accountId: auth.accountId,
-        sessionId: auth.sessionId,
         input: query,
       });
     },
@@ -79,35 +76,23 @@ export function usePopularMovies(query?: MoviesQuery) {
   };
 }
 
-export function useTopRatedMovies() {
-  const [query, setQuery] = useState<MoviesQuery>();
-
+export function useTopRatedMovies(query?: MoviesQuery) {
   const auth = useAuthContext();
 
   const store = useSWR(
     [GET_TOP_RATED_MOVIES, query],
-    () => {
-      return getTopRatedMovies({
+    () =>
+      getTopRatedMovies({
         token: auth.accessToken,
-        accountId: auth.accountId,
-        sessionId: auth.sessionId,
         input: query,
-      });
-    },
+      }),
     {}
   );
 
-  return {
-    ...store,
-    async refetch(query?: MoviesQuery) {
-      setQuery(query);
-    },
-  };
+  return store;
 }
 
-export function useUpcomingMovies() {
-  const [query, setQuery] = useState<MoviesQuery>();
-
+export function useUpcomingMovies(query?: MoviesQuery) {
   const auth = useAuthContext();
 
   const store = useSWR(
@@ -115,20 +100,13 @@ export function useUpcomingMovies() {
     () => {
       return getUpcomingMovies({
         token: auth.accessToken,
-        accountId: auth.accountId,
-        sessionId: auth.sessionId,
         input: query,
       });
     },
     {}
   );
 
-  return {
-    ...store,
-    async refetch(query?: MoviesQuery) {
-      setQuery(query);
-    },
-  };
+  return store;
 }
 
 export function useSimilarMovies(id: number) {
@@ -136,14 +114,11 @@ export function useSimilarMovies(id: number) {
 
   const store = useSWR(
     [GET_SIMILAR_MOVIES, id],
-    () => {
-      return getSimilarMovies({
+    () =>
+      getSimilarMovies({
         token: auth.accessToken,
-        accountId: auth.accountId,
-        sessionId: auth.sessionId,
-        id,
-      });
-    },
+        id: id.toString(),
+      }),
     {}
   );
 
@@ -155,7 +130,7 @@ export function useSearchMovies() {
   const auth = useAuthContext();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [movies, setMovies] = useState<MovieBase[]>([]);
+  const [movies, setMovies] = useState<MovieBaseFragment[]>([]);
   const [pagination, setPagination] = useState<Pagination>({
     page: 0,
     total_pages: 0,
@@ -167,8 +142,6 @@ export function useSearchMovies() {
 
     const res = await searchMovies({
       token: auth.accessToken,
-      accountId: auth.accountId,
-      sessionId: auth.sessionId,
       query: search,
       page,
     });

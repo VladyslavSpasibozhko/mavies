@@ -1,27 +1,6 @@
-/* eslint-disable react-refresh/only-export-components */
-import { gql } from "graphql-request";
-import { MovieBaseFragment } from "../common/fragments";
+import { graphql } from "@api/gql";
 
-const UserFragment = gql`
-  fragment User on UserResponse {
-    avatar {
-      gravatar {
-        hash
-      }
-      tmdb {
-        avatar_path
-      }
-    }
-    id
-    iso_639_1
-    iso_3166_1
-    name
-    include_adult
-    username
-  }
-`;
-
-export const ADD_TO_FAVORITE = gql`
+export const ADD_TO_FAVORITE = graphql(`
   mutation AddToFavorite(
     $account_id: String!
     $session_id: String
@@ -35,9 +14,9 @@ export const ADD_TO_FAVORITE = gql`
       success
     }
   }
-`;
+`);
 
-export const ADD_TO_WATCH_LIST = gql`
+export const ADD_TO_WATCH_LIST = graphql(`
   mutation AddToWatchList(
     $account_id: String!
     $session_id: String
@@ -51,11 +30,9 @@ export const ADD_TO_WATCH_LIST = gql`
       success
     }
   }
-`;
+`);
 
-export const GET_FAVORITE = gql`
-  ${MovieBaseFragment}
-
+export const GET_FAVORITE = graphql(`
   query GetFavorite($account_id: String!, $session_id: String) {
     favorite(account_id: $account_id, session_id: $session_id) {
       results {
@@ -63,11 +40,9 @@ export const GET_FAVORITE = gql`
       }
     }
   }
-`;
+`);
 
-export const GET_WATCH_LIST = gql`
-  ${MovieBaseFragment}
-
+export const GET_WATCH_LIST = graphql(`
   query GetWatchList($account_id: String!, $session_id: String) {
     watchList(account_id: $account_id, session_id: $session_id) {
       results {
@@ -75,13 +50,25 @@ export const GET_WATCH_LIST = gql`
       }
     }
   }
-`;
+`);
 
-export const GET_USER = gql`
-  ${UserFragment}
+export const GET_USER = graphql(`
   query GetUser($account_id: String!) {
     user(account_id: $account_id) {
-      ...User
+      avatar {
+        gravatar {
+          hash
+        }
+        tmdb {
+          avatar_path
+        }
+      }
+      id
+      iso_639_1
+      iso_3166_1
+      name
+      include_adult
+      username
     }
   }
-`;
+`);

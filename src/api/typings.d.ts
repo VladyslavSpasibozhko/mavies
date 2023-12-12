@@ -9,9 +9,3 @@ type FailedResponse = {
   success: false;
   error: string;
 };
-
-type RequestTokens = {
-  token: string | null;
-  accountId: string | null;
-  sessionId: string | null;
-};

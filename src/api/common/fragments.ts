@@ -1,6 +1,6 @@
-import { gql } from "graphql-request";
+import { graphql } from "@api/gql";
 
-export const MovieBaseFragment = gql`
+export const MovieBaseFragment = graphql(`
   fragment MovieBase on Movie {
     id
     title
@@ -10,41 +10,4 @@ export const MovieBaseFragment = gql`
     backdrop_path
     overview
   }
-`;
-
-export const MoviePagination = gql`
-  fragment MoviePagination on Pagination {
-    page
-    total_pages
-    total_results
-  }
-`;
-
-export const MovieDetailedFragment = gql`
-  fragment MovieDetails on MovieDetailed {
-    adult
-    backdrop_path
-    budget
-    genres {
-      id
-      name
-    }
-    homepage
-    id
-    imdb_id
-    original_language
-    original_title
-    overview
-    popularity
-    poster_path
-    release_date
-    revenue
-    runtime
-    status
-    tagline
-    title
-    video
-    vote_average
-    vote_count
-  }
-`;
+`);

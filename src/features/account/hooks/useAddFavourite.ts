@@ -1,18 +1,19 @@
+import { addFavorite } from "@api/account";
+import { ADD_TO_FAVORITE } from "@api/account/query";
+import { AddFavoriteInput } from "@api/gql/graphql";
+import { useAuthContext } from "@context/AuthContext";
 import useSWRMutation from "swr/mutation";
-import { addFavorite } from "../../../api/account";
-import { useAuthContext } from "../../../context/AuthContext";
-import { ADD_TO_FAVORITE } from "../../../api/account/query";
 
 export function useAddFavorite() {
   const auth = useAuthContext();
 
   return useSWRMutation(
     ADD_TO_FAVORITE,
-    (_: string, { arg }: { arg: AddFavoriteInput }) => {
+    (_, { arg }: { arg: AddFavoriteInput }) => {
       return addFavorite({
-        accountId: auth.accountId,
-        sessionId: auth.sessionId,
-        token: auth.accessToken,
+        account_id: auth.accountId as string,
+        session_id: auth.sessionId,
+        token: auth.accessToken as string,
         input: arg,
       });
     }

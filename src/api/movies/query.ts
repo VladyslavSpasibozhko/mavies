@@ -1,14 +1,6 @@
-/* eslint-disable react-refresh/only-export-components */
-import { gql } from "graphql-request";
-import {
-  MovieBaseFragment,
-  MovieDetailedFragment,
-  MoviePagination,
-} from "../common/fragments";
+import { graphql } from "@api/gql";
 
-export const GET_MOVIES = gql`
-  ${MovieBaseFragment}
-
+export const GET_MOVIES = graphql(`
   query MoviesLists {
     movies {
       results {
@@ -31,94 +23,94 @@ export const GET_MOVIES = gql`
       }
     }
   }
-`;
+`);
 
-export const GET_POPULAR_MOVIES = gql`
-  ${MovieBaseFragment}
-  ${MoviePagination}
-
+export const GET_POPULAR_MOVIES = graphql(`
   query PopularMovies($input: MoviesQuery) {
     popularMovies(input: $input) {
       results {
         ...MovieBase
       }
       pagination {
-        ...MoviePagination
+        page
+        total_pages
+        total_results
       }
     }
   }
-`;
+`);
 
-export const GET_TOP_RATED_MOVIES = gql`
-  ${MovieBaseFragment}
-  ${MoviePagination}
-
+export const GET_TOP_RATED_MOVIES = graphql(`
   query TopRatedMovies($input: MoviesQuery) {
     topMovies(input: $input) {
       results {
         ...MovieBase
       }
       pagination {
-        ...MoviePagination
+        total_pages
+        total_results
+        page
       }
     }
   }
-`;
+`);
 
-export const GET_UPCOMING_MOVIES = gql`
-  ${MovieBaseFragment}
-  ${MoviePagination}
-
+export const GET_UPCOMING_MOVIES = graphql(`
   query UpcomingMovies($input: MoviesQuery) {
     upcomingMovies(input: $input) {
       results {
         ...MovieBase
       }
       pagination {
-        ...MoviePagination
+        page
+        total_pages
+        total_results
       }
     }
   }
-`;
+`);
 
-export const SEARCH_MOVIES = gql`
-  ${MovieBaseFragment}
-  ${MoviePagination}
-
+export const SEARCH_MOVIES = graphql(`
   query SearchMovies($query: String!, $page: Int) {
     searchMovies(query: $query, page: $page) {
       results {
         ...MovieBase
       }
       pagination {
-        ...MoviePagination
+        page
+        total_pages
+        total_results
       }
     }
   }
-`;
+`);
 
-export const GET_SIMILAR_MOVIES = gql`
-  ${MovieBaseFragment}
-  ${MoviePagination}
-
+export const GET_SIMILAR_MOVIES = graphql(`
   query SimilarMovies($id: ID!, $page: Int) {
     similarMovies(id: $id, page: $page) {
       results {
         ...MovieBase
       }
       pagination {
-        ...MoviePagination
+        page
+        total_pages
+        total_results
       }
     }
   }
-`;
+`);
 
-export const GET_MOVIE = gql`
-  ${MovieDetailedFragment}
-
+// TODO: FIX
+export const GET_MOVIE = graphql(`
   query GetMovie($id: ID!) {
     movie(id: $id) {
-      ...MovieDetails
+      id
+      title
+      vote_average
+      vote_count
+      poster_path
+      backdrop_path
+      overview
     }
   }
-`;
+`);

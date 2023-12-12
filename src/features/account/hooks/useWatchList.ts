@@ -1,14 +1,15 @@
+import { getWatchListMovies } from "@api/account";
+import { GET_WATCH_LIST } from "@api/account/query";
+import { useAuthContext } from "@context/AuthContext";
 import useSWR from "swr";
-import { useAuthContext } from "../../../context/AuthContext";
-import { getWatchListMovies } from "../../../api/account";
-import { GET_WATCH_LIST } from "../../../api/account/query";
 
 export function useWatchListMovies() {
   const auth = useAuthContext();
-  const results = useSWR<GetWatchListMovies>(GET_WATCH_LIST, () => {
+
+  const results = useSWR(GET_WATCH_LIST, () => {
     return getWatchListMovies({
-      accountId: auth.accountId,
-      sessionId: auth.sessionId,
+      account_id: auth.accountId as string,
+      session_id: auth.sessionId,
       token: auth.accessToken,
     });
   });

@@ -1,3 +1,15 @@
+import {
+  AddToFavoriteMutation,
+  AddToFavoriteMutationVariables,
+  AddToWatchListMutation,
+  AddToWatchListMutationVariables,
+  GetFavoriteQuery,
+  GetFavoriteQueryVariables,
+  GetUserQuery,
+  GetUserQueryVariables,
+  GetWatchListQuery,
+  GetWatchListQueryVariables,
+} from "@api/gql/graphql";
 import { gqlRequest } from "../request";
 import {
   ADD_TO_FAVORITE,
@@ -7,86 +19,88 @@ import {
   GET_WATCH_LIST,
 } from "./query";
 
-export function getUser({ accountId, sessionId, token }: RequestTokens) {
-  return gqlRequest<{ user: User }>({
+export function getUser({
+  account_id,
+  token,
+}: GetUserQueryVariables & { token: string | null }) {
+  return gqlRequest<GetUserQuery>({
     document: GET_USER,
     requestHeaders: {
       authorization: `Bearer ${token}`,
     },
     variables: {
-      account_id: accountId,
-      session_id: sessionId,
+      account_id,
     },
   });
 }
 
 export function getFavoriteMovies({
   token,
-  accountId,
-  sessionId,
-}: RequestTokens) {
-  return gqlRequest<GetFavMovies>({
+  account_id,
+  session_id,
+}: GetFavoriteQueryVariables & { token: string | null }) {
+  return gqlRequest<GetFavoriteQuery>({
     document: GET_FAVORITE,
     requestHeaders: {
       authorization: `Bearer ${token}`,
     },
     variables: {
-      account_id: accountId,
-      session_id: sessionId,
+      account_id,
+      session_id,
     },
   });
 }
 
 export function getWatchListMovies({
   token,
-  accountId,
-  sessionId,
-}: RequestTokens) {
-  return gqlRequest<GetWatchListMovies>({
+  account_id,
+  session_id,
+}: GetWatchListQueryVariables & { token: string | null }) {
+  return gqlRequest<GetWatchListQuery>({
     document: GET_WATCH_LIST,
     requestHeaders: {
       authorization: `Bearer ${token}`,
     },
     variables: {
-      account_id: accountId,
-      session_id: sessionId,
+      account_id,
+      session_id,
     },
   });
 }
 
 export function addFavorite({
-  accountId,
-  sessionId,
+  session_id,
+  account_id,
   input,
   token,
-}: RequestTokens & { input: AddFavoriteInput }) {
-  return gqlRequest<AddFavoriteRes>({
+}: AddToFavoriteMutationVariables & { token: string | null }) {
+  return gqlRequest<AddToFavoriteMutation>({
     document: ADD_TO_FAVORITE,
     requestHeaders: {
       authorization: `Bearer ${token}`,
     },
     variables: {
-      account_id: accountId,
-      session_id: sessionId,
+      account_id,
+      session_id,
       input,
     },
   });
 }
 
 export function addWatchList({
-  accountId,
-  sessionId,
   input,
   token,
-}: RequestTokens & { input: AddWatchListInput }) {
-  return gqlRequest<AddWatchListRes>({
+  account_id,
+  session_id,
+}: AddToWatchListMutationVariables & { token: string | null }) {
+  return gqlRequest<AddToWatchListMutation>({
     document: ADD_TO_WATCH_LIST,
     requestHeaders: {
       authorization: `Bearer ${token}`,
     },
     variables: {
-      account_id: accountId,
-      session_id: sessionId,
+      account_id,
+      session_id,
       input,
     },
   });
