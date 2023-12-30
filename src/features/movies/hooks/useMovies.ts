@@ -142,16 +142,18 @@ export function useUpcomingMovies(query?: MoviesQuery) {
   };
 }
 
-export function useSimilarMovies(id: number) {
+export function useSimilarMovies(id?: string | null, page?: number) {
   const auth = useAuthContext();
 
   const store = useSWR(
-    [GET_SIMILAR_MOVIES, id],
-    () =>
-      getSimilarMovies({
+    () => (id ? [GET_SIMILAR_MOVIES, id, page] : null),
+    ([_, movieId, moviePage]) => {
+      return getSimilarMovies({
+        page: moviePage,
         token: auth.accessToken,
-        id: id.toString(),
-      }),
+        id: movieId,
+      });
+    },
     {}
   );
 

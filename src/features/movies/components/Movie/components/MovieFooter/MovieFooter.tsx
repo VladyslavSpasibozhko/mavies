@@ -1,11 +1,61 @@
 import { useState } from "react";
-import { CardFooter, Flex, Heading } from "@chakra-ui/react";
-import { MovieActions } from "../MovieActions";
+import { CardFooter, Flex, Heading, Text } from "@chakra-ui/react";
+import { MovieActions } from "@features/movies/components/Movie/components/MovieActions";
 import { Icon } from "@components/Icon";
 import { MovieBaseFragment } from "@api/config/graphql";
 
-export function MovieFooter({ movie }: { movie: MovieBaseFragment }) {
+type MovieFooterProps = {
+  size?: "md" | "sm";
+  movie: MovieBaseFragment;
+};
+
+export function MovieFooter({ movie, size = "md" }: MovieFooterProps) {
   const [isHovered, setIsHovered] = useState(false);
+
+  const sizes = {
+    md: {
+      container: {
+        paddingY: 2,
+        paddingX: 4,
+        transform: "translateY(-15%)",
+      },
+      title: {
+        size: "md",
+      },
+      description: {
+        fontSize: 14,
+        fontWeight: 600,
+        maxHeight: 120,
+        WebkitLineClamp: 6,
+      },
+      voting: {
+        fontSize: 14,
+        fontWeight: 600,
+      },
+    },
+    sm: {
+      container: {
+        paddingY: 2,
+        paddingX: 2,
+        transform: "translateY(-20%)",
+      },
+      title: {
+        size: "sm",
+      },
+      description: {
+        fontSize: 12,
+        fontWeight: 600,
+        maxHeight: 120,
+        WebkitLineClamp: 4,
+      },
+      voting: {
+        fontSize: 12,
+        fontWeight: 600,
+      },
+    },
+  };
+
+  const { container, title, description, voting } = sizes[size];
 
   return (
     <CardFooter
@@ -14,25 +64,23 @@ export function MovieFooter({ movie }: { movie: MovieBaseFragment }) {
       position="absolute"
       top="100%"
       background="blackAlpha.700"
-      transform="translateY(-15%)"
       transition="transform 0.2s"
-      paddingY={2}
-      paddingX={4}
       _hover={{
         transform: "translateY(-100%)",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      {...container}
     >
       <Flex flexDirection="column" maxWidth="100%">
         <Flex justifyContent="space-between">
           <Heading
-            size="md"
             color="white"
             whiteSpace="nowrap"
             textOverflow="ellipsis"
             overflow="hidden"
             mr={2}
+            {...title}
           >
             {movie.title}
           </Heading>
@@ -46,7 +94,7 @@ export function MovieFooter({ movie }: { movie: MovieBaseFragment }) {
           >
             <Icon name="AiFillStar" boxSize={4} mr={1} />
             {movie.vote_average && (
-              <Heading size="xs">{movie.vote_average.toFixed(2)}</Heading>
+              <Text css={voting}>{movie.vote_average.toFixed(2)}</Text>
             )}
           </Flex>
         </Flex>
@@ -58,21 +106,19 @@ export function MovieFooter({ movie }: { movie: MovieBaseFragment }) {
           justifyContent="space-between"
           flex={1}
         >
-          <Heading
-            size="xs"
+          <Text
             css={{
               display: "-webkit-box",
               WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 6,
-              maxHeight: "120px",
               maxWidth: "100%",
               color: "white",
               textOverflow: "ellipsis",
               overflow: "hidden",
+              ...description,
             }}
           >
             {movie.overview}
-          </Heading>
+          </Text>
           <MovieActions movie={movie} />
         </Flex>
       </Flex>

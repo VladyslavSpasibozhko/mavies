@@ -1,13 +1,17 @@
 import { Box, BoxProps } from "@chakra-ui/react";
-import { Movie } from "../Movie";
+import { Movie, MovieProps } from "../Movie";
 import { MovieBaseFragment } from "@api/config/graphql";
 import { TextLink } from "./components/TextLink";
+import { useEffect, useRef } from "react";
+import { scrollObserver } from "@utils/scroll";
 
 type MoviesHorizontalListProps = {
   styles?: BoxProps;
   link?: string;
-  title: string;
+  title?: string;
+  size?: MovieProps["size"];
   movies: MovieBaseFragment[];
+  loadMore?: () => void;
 };
 
 export function MoviesHorizontalList({
@@ -15,20 +19,56 @@ export function MoviesHorizontalList({
   title,
   movies,
   styles = {},
+  size = "md",
+  loadMore,
 }: MoviesHorizontalListProps) {
+  const listRef = useRef<HTMLDivElement | null>(null);
+
+  const sizes = {
+    md: {
+      list: {
+        minHeight: 280,
+      },
+      card: {
+        paddingBottom: 8,
+        paddingTop: 8,
+      },
+    },
+    sm: {
+      list: {
+        minHeight: 180,
+      },
+      card: {
+        paddingBottom: 8,
+        paddingTop: 8,
+      },
+    },
+  };
+
+  const { list, card } = sizes[size];
+
+  useEffect(() => {
+    const root = listRef.current as HTMLDivElement;
+
+    return scrollObserver(root, () => {
+      if (loadMore) loadMore();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Box {...styles}>
-      <TextLink link={link} title={title} />
-      <Box minHeight={280}>
+      {title && <TextLink link={link} title={title} />}
+      <Box {...list}>
         <Box
+          ref={listRef}
           display="flex"
           alignItems="center"
           overflowX="auto"
-          paddingBottom={8}
-          paddingTop={8}
+          {...card}
         >
           {movies.map((movie) => (
-            <Movie key={movie.id} movie={movie} />
+            <Movie key={movie.id} movie={movie} size={size} />
           ))}
         </Box>
       </Box>

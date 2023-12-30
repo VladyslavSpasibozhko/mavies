@@ -1,19 +1,20 @@
 import { useParams } from "react-router-dom";
-import { useMovie } from "../features/movies/hooks/useMovies";
-import { Loader } from "../components/Loader";
-import { Error } from "../components/Error";
-import { NoResults } from "../components/NoResults";
-import { GenreTag } from "../features/genres/components/GenreTag";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { constructMovieImageSrc } from "@utils/index";
 import { Icon } from "@components/Icon";
 import { format } from "@utils/date";
 import { ToggleFavorite } from "@features/movies/components/Movie/components/ToggleFavorite";
 import { ToggleWatchList } from "@features/movies/components/Movie/components/ToggleWatchList";
+import { useMovie } from "@features/movies/hooks/useMovies";
+import { Loader } from "@components/Loader";
+import { Error } from "@components/Error";
+import { NoResults } from "@components/NoResults";
+import { GenreTag } from "@features/genres/components/GenreTag";
+import { SimilarMovies } from "./components/SimilarMovies";
 
-// TODO: add similar movie
 // TODO: add trailers
 // TODO: click to genre should move to movies with same genre
+// TODO: Image can be null
 export function MovieView() {
   const { id } = useParams();
 
@@ -76,10 +77,11 @@ export function MovieView() {
           </Text>
 
           <Text mt={4} color="whiteAlpha.900" fontWeight={600}>
-            {/* TODO: Fix */}
             Realized: {format(data.movie.release_date ?? "", "MMMM YYYY")}
           </Text>
         </Box>
+
+        <SimilarMovies />
       </Box>
     </Box>
   );
