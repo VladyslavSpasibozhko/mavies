@@ -2,9 +2,10 @@ import { useAddWatchList } from "@features/account/hooks/useAddWatchList";
 import { useWatchListMovies } from "@features/account/hooks/useWatchList";
 import { Icon } from "@components/Icon";
 import { IconProps } from "@chakra-ui/react";
+import { MovieBaseFragment, MovieDetailed } from "@api/config/graphql";
 
 type Props = Omit<IconProps, "name"> & {
-  movie: MovieBase;
+  movie: MovieBaseFragment | MovieDetailed;
 };
 
 export function ToggleWatchList({ movie, ...rest }: Props) {
@@ -34,7 +35,7 @@ export function ToggleWatchList({ movie, ...rest }: Props) {
 
     if (res.addWatchList.success) {
       const newFavorites = !isInWatchList
-        ? watchList.data.results.concat(movie)
+        ? watchList.data.results.concat(movie as MovieBaseFragment)
         : watchList.data.results.filter((m) => m.id !== movie.id);
 
       watchList.mutate(

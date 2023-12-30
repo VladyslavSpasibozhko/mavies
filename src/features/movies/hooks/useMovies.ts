@@ -19,10 +19,12 @@ import {
   searchMovies,
 } from "@api/movies";
 import {
-  MovieBaseFragment,
   Pagination,
   PopularMoviesQuery,
-} from "@api/gql/graphql";
+  SearchMoviesQuery,
+  TopRatedMoviesQuery,
+  UpcomingMoviesQuery,
+} from "@api/config/graphql";
 
 export function useMovie(id?: string) {
   const auth = useAuthContext();
@@ -77,6 +79,17 @@ export function usePopularMovies(query?: MoviesQuery) {
 }
 
 export function useTopRatedMovies(query?: MoviesQuery) {
+  const defaultData: TopRatedMoviesQuery = {
+    topMovies: {
+      results: [],
+      pagination: {
+        page: 0,
+        total_pages: 0,
+        total_results: 0,
+      },
+    },
+  };
+
   const auth = useAuthContext();
 
   const store = useSWR(
@@ -89,10 +102,24 @@ export function useTopRatedMovies(query?: MoviesQuery) {
     {}
   );
 
-  return store;
+  return {
+    ...store,
+    data: store.data ?? defaultData,
+  };
 }
 
 export function useUpcomingMovies(query?: MoviesQuery) {
+  const defaultData: UpcomingMoviesQuery = {
+    upcomingMovies: {
+      results: [],
+      pagination: {
+        page: 0,
+        total_pages: 0,
+        total_results: 0,
+      },
+    },
+  };
+
   const auth = useAuthContext();
 
   const store = useSWR(
@@ -106,7 +133,10 @@ export function useUpcomingMovies(query?: MoviesQuery) {
     {}
   );
 
-  return store;
+  return {
+    ...store,
+    data: store.data ?? defaultData,
+  };
 }
 
 export function useSimilarMovies(id: number) {
@@ -130,7 +160,9 @@ export function useSearchMovies() {
   const auth = useAuthContext();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [movies, setMovies] = useState<MovieBaseFragment[]>([]);
+  const [movies, setMovies] = useState<
+    SearchMoviesQuery["searchMovies"]["results"]
+  >([]);
   const [pagination, setPagination] = useState<Pagination>({
     page: 0,
     total_pages: 0,

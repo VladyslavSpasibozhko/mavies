@@ -1,3 +1,4 @@
+import { Genre } from "@api/config/graphql";
 import { useState } from "react";
 
 type Voting = {

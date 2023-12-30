@@ -1,3 +1,4 @@
+import { Genre } from "@api/config/graphql";
 import { Tag, TagCloseButton, TagLabel, TagProps } from "@chakra-ui/react";
 // import { Icon, IconProps } from "@components/Icon";
 

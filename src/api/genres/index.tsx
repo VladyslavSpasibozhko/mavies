@@ -1,4 +1,4 @@
-import { GenreListQuery } from "@api/gql/graphql";
+import { GenreListQuery } from "@api/config/graphql";
 import { gqlRequest } from "../request";
 import { GET_GENRES } from "./query";
 

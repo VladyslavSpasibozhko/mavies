@@ -1,3 +1,4 @@
+import { MovieBaseFragment } from "@api/config/graphql";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { Error } from "@components/Error";
 import { Loader } from "@components/Loader";
@@ -7,7 +8,7 @@ import { Movie } from "@features/movies/components/Movie";
 type MoviesListProps = {
   isLoading: boolean;
   error: Error;
-  movies: Movie[];
+  movies: MovieBaseFragment[];
 };
 
 export function MoviesList({ isLoading, error, movies }: MoviesListProps) {

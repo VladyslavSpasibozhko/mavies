@@ -1,4 +1,4 @@
-import { graphql } from "@api/gql";
+import { graphql } from "@api/config";
 
 export const GET_MOVIES = graphql(`
   query MoviesLists {
@@ -111,6 +111,11 @@ export const GET_MOVIE = graphql(`
       poster_path
       backdrop_path
       overview
+      release_date
+      genres {
+        id
+        name
+      }
     }
   }
 `);

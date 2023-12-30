@@ -27,7 +27,7 @@ export function AccountMoviesView() {
     <div>
       <MoviesHorizontalList
         title="Favorite movies"
-        movies={favorite.data.results as Movie[]}
+        movies={favorite.data.results}
       />
       <MoviesHorizontalList
         title="Watch later"

@@ -1,4 +1,4 @@
-import { v3, v4 } from "./config";
+import { v3, v4 } from "./paths";
 import {
   RequestDocument,
   Variables,

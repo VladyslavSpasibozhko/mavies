@@ -1,5 +1,6 @@
 import ReactSelect from "react-select";
 import { useGenres } from "@features/genres/hooks/useGenres";
+import { Genre } from "@api/config/graphql";
 import "./GenreSelect.css";
 
 type GenresSelectProps = {

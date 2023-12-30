@@ -1,6 +1,6 @@
 import { addFavorite } from "@api/account";
 import { ADD_TO_FAVORITE } from "@api/account/query";
-import { AddFavoriteInput } from "@api/gql/graphql";
+import { AddFavoriteInput } from "@api/config/graphql";
 import { useAuthContext } from "@context/AuthContext";
 import useSWRMutation from "swr/mutation";
 

@@ -16,13 +16,15 @@ import { useUser } from "../../hooks/useUser";
 export function AccountInfo() {
   const { data } = useUser();
 
-  if (!data) return null;
+  if (!data || !data.user) return null;
 
   return (
     <Popover>
       <PopoverTrigger>
         <Flex cursor="pointer">
-          <AccountAvatar hash={data.user.avatar.gravatar.hash} size={25} />
+          {data.user.avatar?.gravatar?.hash && (
+            <AccountAvatar hash={data.user.avatar.gravatar.hash} size={25} />
+          )}
           <Text color="whiteAlpha.900" as="h6">
             {data.user.name || data.user.username}
           </Text>

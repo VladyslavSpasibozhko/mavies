@@ -1,6 +1,6 @@
-import { useSearchMovies } from "../../hooks/useMovies";
-import { useNavigation } from "../../../../hooks/useNavigation";
 import Select from "react-select";
+import { useNavigation } from "@hooks/useNavigation";
+import { useSearchMovies } from "@features/movies/hooks/useMovies";
 import "./MovieSearch.css";
 
 export function MovieSearch() {
@@ -22,7 +22,7 @@ export function MovieSearch() {
         fetchDebounce(value);
       }}
       onChange={(option) => {
-        goTo("/movies/:id", { id: option?.id });
+        if (option) goTo("/movies/:id", { id: option.id });
       }}
       components={{
         IndicatorSeparator: null,

@@ -2,8 +2,9 @@ import { useState } from "react";
 import { CardFooter, Flex, Heading } from "@chakra-ui/react";
 import { MovieActions } from "../MovieActions";
 import { Icon } from "@components/Icon";
+import { MovieBaseFragment } from "@api/config/graphql";
 
-export function MovieFooter({ movie }: { movie: MovieBase }) {
+export function MovieFooter({ movie }: { movie: MovieBaseFragment }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -44,7 +45,9 @@ export function MovieFooter({ movie }: { movie: MovieBase }) {
             borderRadius={4}
           >
             <Icon name="AiFillStar" boxSize={4} mr={1} />
-            <Heading size="xs">{movie.vote_average.toFixed(2)}</Heading>
+            {movie.vote_average && (
+              <Heading size="xs">{movie.vote_average.toFixed(2)}</Heading>
+            )}
           </Flex>
         </Flex>
         <Flex

@@ -29,7 +29,8 @@ export function MovieView() {
     <Box
       minHeight="mainContent"
       minWidth="100%"
-      backgroundImage={constructMovieImageSrc(data.movie.backdrop_path)}
+      // TODO: Fix
+      backgroundImage={constructMovieImageSrc(data.movie.backdrop_path ?? "")}
       backgroundSize="cover"
       backgroundPosition="top"
       backgroundRepeat="no-repeat"
@@ -75,7 +76,8 @@ export function MovieView() {
           </Text>
 
           <Text mt={4} color="whiteAlpha.900" fontWeight={600}>
-            Realized: {format(data.movie.release_date, "MMMM YYYY")}
+            {/* TODO: Fix */}
+            Realized: {format(data.movie.release_date ?? "", "MMMM YYYY")}
           </Text>
         </Box>
       </Box>

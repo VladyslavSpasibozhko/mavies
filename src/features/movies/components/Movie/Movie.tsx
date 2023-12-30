@@ -2,8 +2,9 @@ import { Card } from "@chakra-ui/react";
 import { MovieFooter } from "./components/MovieFooter";
 import { Img } from "@components/Image";
 import { useNavigation } from "@hooks/useNavigation";
+import { MovieBaseFragment } from "@api/config/graphql";
 
-export function Movie({ movie }: { movie: MovieBase }) {
+export function Movie({ movie }: { movie: MovieBaseFragment }) {
   const { goTo } = useNavigation();
 
   return (

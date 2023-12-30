@@ -9,7 +9,7 @@ import {
   GetUserQueryVariables,
   GetWatchListQuery,
   GetWatchListQueryVariables,
-} from "@api/gql/graphql";
+} from "@api/config/graphql";
 import { gqlRequest } from "../request";
 import {
   ADD_TO_FAVORITE,

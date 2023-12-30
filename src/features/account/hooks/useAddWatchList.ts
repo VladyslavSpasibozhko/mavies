@@ -1,6 +1,6 @@
 import { addWatchList } from "@api/account";
 import { ADD_TO_WATCH_LIST } from "@api/account/query";
-import { AddWatchListInput } from "@api/gql/graphql";
+import { AddWatchListInput } from "@api/config/graphql";
 import { useAuthContext } from "@context/AuthContext";
 import useSWRMutation from "swr/mutation";
 

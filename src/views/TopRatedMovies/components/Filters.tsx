@@ -11,12 +11,12 @@ function filterGenres(genres: Genre[], id: number) {
 
 export function Filters() {
   const {
+    voting,
     withGenres,
     withoutGenres,
-    voting,
+    onSetVoting,
     onSetWithGenres,
     onSetWithoutGenres,
-    onSetVoting,
   } = useFilter();
 
   return (
@@ -25,7 +25,6 @@ export function Filters() {
         <Heading color="whiteAlpha.900" size="lg" textTransform="uppercase">
           Popular
         </Heading>
-
         <Flex flexGrow={1} ml={12}>
           <Box mr={2} flexGrow={2}>
             <GenresSelect

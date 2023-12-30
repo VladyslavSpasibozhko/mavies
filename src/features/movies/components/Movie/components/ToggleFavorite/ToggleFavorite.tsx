@@ -2,9 +2,10 @@ import { useFavoriteMovies } from "@features/account/hooks/useFavoriteMovies";
 import { useAddFavorite } from "@features/account/hooks/useAddFavourite";
 import { Icon } from "@components/Icon";
 import { IconProps } from "@chakra-ui/react";
+import { MovieBaseFragment, MovieDetailed } from "@api/config/graphql";
 
 type Props = Omit<IconProps, "name"> & {
-  movie: MovieBase;
+  movie: MovieBaseFragment | MovieDetailed;
 };
 
 export function ToggleFavorite({ movie, ...rest }: Props) {
@@ -34,7 +35,7 @@ export function ToggleFavorite({ movie, ...rest }: Props) {
 
     if (res.addFavorite.success) {
       const newFavorites = !isFavorite
-        ? favorite.data.results.concat(movie)
+        ? favorite.data.results.concat(movie as MovieBaseFragment)
         : favorite.data.results.filter((m) => m.id !== movie.id);
 
       favorite.mutate(

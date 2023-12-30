@@ -12,7 +12,7 @@ import {
   TopRatedMoviesQueryVariables,
   UpcomingMoviesQuery,
   UpcomingMoviesQueryVariables,
-} from "@api/gql/graphql";
+} from "@api/config/graphql";
 import { gqlRequest } from "../request";
 import {
   GET_MOVIE,

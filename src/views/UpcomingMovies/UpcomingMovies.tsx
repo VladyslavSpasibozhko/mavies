@@ -1,4 +1,4 @@
-import { useUpcomingMovies } from "../../features/movies/hooks/useMovies";
+import { useUpcomingMovies } from "@features/movies/hooks/useMovies";
 
 export function UpcomingMovies() {
   const data = useUpcomingMovies();

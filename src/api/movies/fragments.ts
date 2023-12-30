@@ -1,4 +1,4 @@
-import { graphql } from "@api/gql";
+import { graphql } from "@api/config";
 
 export const MovieBaseFragment = graphql(`
   fragment MovieBase on Movie {
