@@ -1,7 +1,10 @@
-import { useTopRatedMovies } from "../../features/movies/hooks/useMovies";
+import { FiltersProvider } from "@features/movies/context/FiltersProvider";
+import { MoviesView } from "./components/MoviesView";
 
 export function TopRatedMovies() {
-  const data = useTopRatedMovies();
-
-  return <div>{JSON.stringify(data)}</div>;
+  return (
+    <FiltersProvider>
+      <MoviesView />
+    </FiltersProvider>
+  );
 }

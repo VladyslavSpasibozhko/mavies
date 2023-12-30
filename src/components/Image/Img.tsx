@@ -87,8 +87,10 @@ export function Img({ src, skeletonH, skeletonW, ...rest }: ImgProps) {
       isLoaded={!!imgSrc}
       startColor="whiteAlpha.500"
       endColor="blackAlpha.500"
-      w={skeletonW}
-      h={skeletonH}
+      w="100%"
+      h="100%"
+      minH={skeletonH}
+      minW={skeletonW}
       fadeDuration={0.5}
     >
       {imgSrc && <ChakraImage src={imgSrc} {...rest} />}

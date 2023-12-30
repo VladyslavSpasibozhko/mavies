@@ -11,20 +11,21 @@ function filterGenres(genres: Genre[], id: number) {
 
 export function Filters() {
   const {
-    voting,
     withGenres,
     withoutGenres,
-    onSetVoting,
+    voting,
     onSetWithGenres,
     onSetWithoutGenres,
+    onSetVoting,
   } = useFilter();
 
   return (
     <Box paddingX={8} pt={8} pb={4}>
       <Flex justify="space-between">
         <Heading color="whiteAlpha.900" size="lg" textTransform="uppercase">
-          Popular
+          Top Rated
         </Heading>
+
         <Flex flexGrow={1} ml={12}>
           <Box mr={2} flexGrow={2}>
             <GenresSelect

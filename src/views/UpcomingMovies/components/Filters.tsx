@@ -23,7 +23,7 @@ export function Filters() {
     <Box paddingX={8} pt={8} pb={4}>
       <Flex justify="space-between">
         <Heading color="whiteAlpha.900" size="lg" textTransform="uppercase">
-          Popular
+          Upcoming
         </Heading>
 
         <Flex flexGrow={1} ml={12}>

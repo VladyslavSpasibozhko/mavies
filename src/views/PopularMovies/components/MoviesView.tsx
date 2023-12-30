@@ -10,18 +10,19 @@ import { Movie } from "@features/movies/components/Movie";
 
 export function MoviesView() {
   const { query, onSetPage } = useFilter();
-  const { isLoading, error, data } = usePopularMovies(query);
-
-  if (isLoading) return <Loader />;
+  const { isLoading, error, noResults, data } = usePopularMovies(query);
 
   if (error) return <Error reason={error.message} />;
 
-  if (!data.popularMovies.results.length) return <NoResults />;
+  if (noResults) return <NoResults />;
 
   return (
     <Flex flexDir="column" height="mainContent" position="relative">
       <Filters />
+
       <Box flex="1" overflow="auto">
+        {isLoading && <Loader />}
+
         <Grid
           gap={4}
           padding={4}

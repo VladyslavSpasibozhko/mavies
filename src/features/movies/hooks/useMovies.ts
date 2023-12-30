@@ -74,6 +74,7 @@ export function usePopularMovies(query?: MoviesQuery) {
 
   return {
     ...store,
+    noResults: !store.isLoading && !store.data?.popularMovies.results.length,
     data: store.data ? store.data : defaultData,
   };
 }
@@ -104,6 +105,7 @@ export function useTopRatedMovies(query?: MoviesQuery) {
 
   return {
     ...store,
+    noResults: !store.isLoading && !store.data?.topMovies.results.length,
     data: store.data ?? defaultData,
   };
 }
@@ -135,6 +137,7 @@ export function useUpcomingMovies(query?: MoviesQuery) {
 
   return {
     ...store,
+    noResults: !store.isLoading && !store.data?.upcomingMovies.results.length,
     data: store.data ?? defaultData,
   };
 }

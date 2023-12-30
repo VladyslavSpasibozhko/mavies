@@ -12,6 +12,7 @@ import { TopRatedMovies } from "../pages/TopRatedMovies";
 
 // TODO: create urls object
 // TODO: lazy load pages
+// TODO: Add not found
 const routes: RouteObject[] = [
   {
     path: "/",

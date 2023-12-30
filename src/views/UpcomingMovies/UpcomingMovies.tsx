@@ -1,7 +1,10 @@
-import { useUpcomingMovies } from "@features/movies/hooks/useMovies";
+import { FiltersProvider } from "@features/movies/context/FiltersProvider";
+import { MoviesView } from "./components/MoviesView";
 
 export function UpcomingMovies() {
-  const data = useUpcomingMovies();
-
-  return <div>{JSON.stringify(data)}</div>;
+  return (
+    <FiltersProvider>
+      <MoviesView />
+    </FiltersProvider>
+  );
 }

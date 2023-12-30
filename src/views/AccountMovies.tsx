@@ -4,6 +4,7 @@ import { NoResults } from "../components/NoResults";
 import { MoviesHorizontalList } from "../features/movies/components/MoviesHorizontalList/MoviesHorizontalList";
 import { useFavoriteMovies } from "../features/account/hooks/useFavoriteMovies";
 import { useWatchListMovies } from "../features/account/hooks/useWatchList";
+import { Box } from "@chakra-ui/react";
 
 export function AccountMoviesView() {
   const watchList = useWatchListMovies();
@@ -24,15 +25,17 @@ export function AccountMoviesView() {
   }
 
   return (
-    <div>
+    <Box pl={8}>
       <MoviesHorizontalList
         title="Favorite movies"
         movies={favorite.data.results}
+        styles={{ mt: "8" }}
       />
       <MoviesHorizontalList
         title="Watch later"
         movies={watchList.data.results}
+        styles={{ mt: "8" }}
       />
-    </div>
+    </Box>
   );
 }
