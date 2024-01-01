@@ -1,9 +1,9 @@
-import { v3, v4 } from "./paths";
 import {
   RequestDocument,
   Variables,
   request as gqFetch,
 } from "graphql-request";
+import { envs } from "@services/env.service";
 
 type RequestOptions = {
   v3?: boolean;
@@ -40,8 +40,8 @@ function query(data: RequestOptions["query"]) {
 }
 
 const constructUrl = (path: string, options: RequestOptions) => {
-  if (options.v4) return v4 + path;
-  return v3 + path;
+  if (options.v4) return envs.VITE_TMDB_V4 + path;
+  return envs.VITE_TMDB_V3 + path;
 };
 
 function construct(url: string, options: RequestOptions) {
@@ -80,7 +80,5 @@ export async function gqlRequest<T>(props: {
   requestHeaders: Record<string, string>;
   variables?: Variables;
 }) {
-  // TODO: remove from here
-  // TODO: MOve to env
-  return await gqFetch<T>({ url: "http://localhost:8080", ...props });
+  return await gqFetch<T>({ url: envs.VITE_SERVER_URL, ...props });
 }

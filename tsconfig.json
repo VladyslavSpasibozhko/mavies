@@ -16,7 +16,8 @@
       "@views/*": ["./src/views/*"],
       "@utils/*": ["./src/utils/*"],
       "@router/*": ["./src/router/*"],
-      "@components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@services/*": ["./src/services/*"]
     },
 
     "moduleResolution": "Bundler",

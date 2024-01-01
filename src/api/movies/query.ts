@@ -100,7 +100,6 @@ export const GET_SIMILAR_MOVIES = graphql(`
   }
 `);
 
-// TODO: FIX
 export const GET_MOVIE = graphql(`
   query GetMovie($id: ID!) {
     movie(id: $id) {

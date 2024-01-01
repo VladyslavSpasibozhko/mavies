@@ -23,5 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-graphql.schema.json
-__generated__
+.env
+.env.development

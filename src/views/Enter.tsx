@@ -12,6 +12,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { Link } from "@components/Link";
+import { envs } from "@services/env.service";
 
 function EnterContainer({ children }: { children: React.ReactNode }) {
   return (
@@ -53,10 +54,7 @@ export function Enter() {
   }
 
   function onApprove() {
-    // TODO: save links to env files
-    window.open(
-      `https://www.themoviedb.org/auth/access?redirect_to=http://localhost:5173&request_token=${requestToken}`
-    );
+    window.open(envs.VITE_TMDB_ACCESS + "?" + `request_token=${requestToken}}`);
   }
 
   async function onCreateAccessToken() {
@@ -101,7 +99,7 @@ export function Enter() {
         <FormControl isInvalid={!!requestTokenError.length}>
           <FormLabel color="whiteAlpha.800">
             Paste your TMDB token. If you do not have yet it create it here -
-            <Link to="https://www.themoviedb.org/signup" ml={2} isExternal>
+            <Link to={envs.VITE_TMDB_SIGNUP} ml={2} isExternal>
               TMDB
             </Link>
           </FormLabel>
