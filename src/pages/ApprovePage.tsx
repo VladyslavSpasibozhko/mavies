@@ -1,4 +1,4 @@
-import { Approve } from "../features/auth/views/Approve";
+import { Approve } from "../views/Approve";
 
 export function ApprovePage() {
   return <Approve />;

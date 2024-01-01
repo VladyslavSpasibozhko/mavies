@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { parseSearchParams } from "../../../utils/url";
-import { createAccessToken } from "../../../api/auth";
-import { useAuthContext } from "../../../context/AuthContext";
+import { parseSearchParams } from "../utils/url";
+import { createAccessToken } from "../api/auth";
+import { useAuthContext } from "../context/AuthContext";
 
 // TODO: Move to views
 // TODO: fix imports
